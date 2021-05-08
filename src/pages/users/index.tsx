@@ -4,6 +4,7 @@ import { RiAddLine, RiPencilLine } from 'react-icons/ri';
 import { Header } from '../../components/Header';
 import { Sidebar } from '../../components/Sidebar';
 import { Pagination } from '../../components/Pagination';
+import { useEffect } from 'react';
 
 export default function UserList() {
 
@@ -11,6 +12,12 @@ export default function UserList() {
         base: false,
         lg: true
     })
+
+    useEffect(()=>{
+        fetch('http://localhost:3000/api/users')
+        .then(response => response.json())
+        .then(data => console.log(data));
+    }, [])
 
     return (
         <Box>
