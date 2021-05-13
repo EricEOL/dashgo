@@ -5,12 +5,12 @@ import { Header } from '../../components/Header';
 import { Sidebar } from '../../components/Sidebar';
 import { Pagination } from '../../components/Pagination';
 import { useQuery } from 'react-query';
+import { api } from '../../services/api';
 
 export default function UserList() {
 
     const { data, isLoading, isFetching, error } = useQuery('users', async () => {
-        const response = await fetch('http://localhost:3000/api/users');
-        const data = await response.json();
+        const { data } = await api.get('users');
 
         const users = data.users.map(user => {
             return {
@@ -26,7 +26,7 @@ export default function UserList() {
         })
 
         return users;
-    },{
+    }, {
         staleTime: 1000 * 5, // 5 seconds
     })
 
